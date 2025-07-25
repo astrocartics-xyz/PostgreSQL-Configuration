@@ -61,9 +61,8 @@ Edit the files from the pgbouncer path.
 
 From the schema directory....
 
-```
-
 Apply this schema with:
+
 ```sh
 psql -U your_db_user_here -d your_db_name_here -f schema/schema.sql
 ```

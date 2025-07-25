@@ -50,10 +50,10 @@ Edit the files from the pgbouncer path.
 ```text
 "your_db_user_here" "SCRAM-SHA-256$4096:<salt>$<stored_key>$<server_key>"
 ```
-- Populate with the real PostgreSQL users and SCRAM hashes from:
-  ```sql
-  SELECT usename, passwd FROM pg_shadow;
-  ```
+Populate with the real PostgreSQL users and SCRAM hashes from:
+```sql
+SELECT usename, passwd FROM pg_shadow;
+```
 
 ## 4. Apply Database Schema
 

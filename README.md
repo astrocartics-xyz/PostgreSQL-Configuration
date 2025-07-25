@@ -46,8 +46,6 @@ sudo sysrc pgbouncer_enable=YES
 
 Edit the files from the pgbouncer path.
 
-```
-
 ### pool/userlist.txt
 ```text
 "your_db_user_here" "SCRAM-SHA-256$4096:<salt>$<stored_key>$<server_key>"

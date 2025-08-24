@@ -41,7 +41,6 @@ CREATE TABLE Stargates (
     FOREIGN KEY (system_id) REFERENCES Systems(system_id),
     FOREIGN KEY (destination_system_id) REFERENCES Systems(system_id)
 );
-
 /* 
   Planets table.
 */
@@ -53,8 +52,7 @@ CREATE TABLE Planets (
     moon_count INTEGER NOT NULL DEFAULT 0,
     asteroid_belt_count INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (system_id) REFERENCES Systems(system_id)
-);
-
+)
 /* 
   Stations table.
 */
@@ -64,17 +62,52 @@ CREATE TABLE Stations (
     system_id INTEGER NOT NULL,
     FOREIGN KEY (system_id) REFERENCES Systems(system_id)
 );
-
+/*
+  Killmails, from zkillboard for real time data.
+*/
+CREATE TABLE killmails (
+    killmail_id BIGINT PRIMARY KEY,
+    corporation_id BIGINT,
+    alliance_id BIGINT,
+    solar_system_id BIGINT,
+    killmail_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    destroyed_value NUMERIC,
+    dropped_value NUMERIC
+);
+/*
+  Factions stored
+*/
+CREATE TABLE factions (
+    corporation_id BIGINT,
+    faction_id BIGINT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    capital_system VARCHAR(255),
+    militia_corporation_id BIGINT
+);
+/*
+  Sovereignty Campaigns table, every hour.
+*/
+CREATE TABLE sovereignty_campaigns (
+    campaign_id BIGINT PRIMARY KEY,
+    attackers_score FLOAT,
+    constellation_id BIGINT,
+    defender_id BIGINT,
+    defender_score FLOAT,
+    event_type TEXT,
+    solar_system_id BIGINT,
+    start_time TIMESTAMP,
+    structure_id BIGINT
+);
 /*
   Indexes for performance.
 */
+CREATE INDEX idx_killmail_time ON killmails (killmail_time);
 CREATE INDEX idx_constellations_region_id ON Constellations(region_id);
 CREATE INDEX idx_systems_constellation_id ON Systems(constellation_id);
 CREATE INDEX idx_stargates_system_id ON Stargates(system_id);
 CREATE INDEX idx_stargates_destination_system_id ON Stargates(destination_system_id);
 CREATE INDEX idx_planets_system_id ON Planets(system_id);
 CREATE INDEX idx_stations_system_id ON Stations(system_id);
-
 -- Optional: Indexes on name columns if you search by them frequently
 CREATE INDEX idx_regions_name ON Regions(region_name);
 -- CREATE INDEX idx_constellations_name ON Constellations(constellation_name);

@@ -113,6 +113,7 @@ CREATE TABLE sovereignty_structures (
     alliance_id BIGINT,
     solar_system_id BIGINT,
     structure_type_id BIGINT,
+    structure_type_name TEXT,
     vulnerability_start_time TIMESTAMP,
     vulnerability_end_time TIMESTAMP
 );

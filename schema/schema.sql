@@ -85,6 +85,13 @@ CREATE TABLE factions (
     militia_corporation_id BIGINT
 );
 /*
+  Alliances, updated every hour for naming.
+*/
+CREATE TABLE alliances (
+    alliance_id BIGINT PRIMARY KEY,
+    name VARCHAR(255)
+);
+/*
   Sovereignty Campaigns table, every hour.
 */
 CREATE TABLE sovereignty_campaigns (
@@ -97,6 +104,25 @@ CREATE TABLE sovereignty_campaigns (
     solar_system_id BIGINT,
     start_time TIMESTAMP,
     structure_id BIGINT
+);
+/*
+  Sovereignty structures, for player owned capital and gates.
+*/
+CREATE TABLE sovereignty_structures (
+    structure_id BIGINT PRIMARY KEY,
+    alliance_id BIGINT,
+    solar_system_id BIGINT,
+    structure_type_id BIGINT,
+    vulnerability_start_time TIMESTAMP,
+    vulnerability_end_time TIMESTAMP
+);
+/*
+  Sovereignty mapping
+*/
+CREATE TABLE sovereignty (
+    system_id BIGINT PRIMARY KEY,
+    faction_id BIGINT,
+    alliance_id BIGINT
 );
 /*
   Indexes for performance.

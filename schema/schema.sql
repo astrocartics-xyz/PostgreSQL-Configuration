@@ -77,9 +77,7 @@ CREATE TABLE killmails (
     ship_type BIGINT
 );
 /* Currently, unavailable and under development.
-/*
   Factions stored
-*/
 CREATE TABLE factions (
     corporation_id BIGINT,
     faction_id BIGINT PRIMARY KEY,
@@ -87,16 +85,12 @@ CREATE TABLE factions (
     capital_system VARCHAR(255),
     militia_corporation_id BIGINT
 );
-/*
   Alliances, updated every hour for naming.
-*/
 CREATE TABLE alliances (
     alliance_id BIGINT PRIMARY KEY,
     name VARCHAR(255)
 );
-/*
   Sovereignty Campaigns table, every hour.
-*/
 CREATE TABLE sovereignty_campaigns (
     campaign_id BIGINT PRIMARY KEY,
     attackers_score FLOAT,
@@ -108,9 +102,7 @@ CREATE TABLE sovereignty_campaigns (
     start_time TIMESTAMP,
     structure_id BIGINT
 );
-/*
   Sovereignty structures, for player owned capital and gates.
-*/
 CREATE TABLE sovereignty_structures (
     structure_id BIGINT PRIMARY KEY,
     alliance_id BIGINT,
@@ -120,15 +112,14 @@ CREATE TABLE sovereignty_structures (
     vulnerability_start_time TIMESTAMP,
     vulnerability_end_time TIMESTAMP
 );
-/*
   Sovereignty mapping
-*/
 CREATE TABLE sovereignty (
     system_id BIGINT PRIMARY KEY,
     faction_id BIGINT,
     alliance_id BIGINT
 );
 */
+
 /*
   Indexes for performance.
 */

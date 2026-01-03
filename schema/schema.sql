@@ -67,13 +67,16 @@ CREATE TABLE Stations (
 */
 CREATE TABLE killmails (
     killmail_id BIGINT PRIMARY KEY,
-    corporation_id BIGINT,
-    alliance_id BIGINT,
+    killmail_hash TEXT,
     solar_system_id BIGINT,
     killmail_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     destroyed_value NUMERIC,
-    dropped_value NUMERIC
+    dropped_value NUMERIC,
+    fitted_value NUMERIC,
+    total_value NUMERIC,
+    ship_type BIGINT
 );
+/* Currently, unavailable and under development.
 /*
   Factions stored
 */
@@ -125,6 +128,7 @@ CREATE TABLE sovereignty (
     faction_id BIGINT,
     alliance_id BIGINT
 );
+*/
 /*
   Indexes for performance.
 */

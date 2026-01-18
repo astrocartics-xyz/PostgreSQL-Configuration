@@ -76,6 +76,21 @@ CREATE TABLE killmails (
     total_value NUMERIC,
     ship_type BIGINT
 );
+/*
+  Cron Job Set Up
+  1. Add the following to postgresql.conf:
+      shared_preload_libraries = 'pg_cron'
+      cron.database_name = 'map'
+  2. Add this to pg_hba.conf:
+      # TYPE  DATABASE        USER            ADDRESS                 METHOD
+      local   map             postgres                                peer
+  3. Restart posgresql services    
+*/
+CREATE EXTENSION pg_cron;
+/* Create Schedule */
+SELECT cron.schedule('delete_old_kills', '0 * * * *', $$DELETE FROM killmails WHERE killmail_time < NOW() - INTERVAL '30 days'$$);
+/* Nodename is empty for UNIX Socket */
+UPDATE cron.job SET nodename = '', username = 'postgres' WHERE jobid = (SELECT jobid FROM cron.job WHERE command LIKE '%killmails%');
 /* Currently, unavailable and under development.
   Factions stored
 CREATE TABLE factions (
